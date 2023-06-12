@@ -1,7 +1,7 @@
 package com.bobpatton3.edanalyzer.persistence.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,29 +12,38 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "arrivals")
 public class Arrival {
-    
+
     @Id
     private UUID id;
-    
+
     private String client_group;
-    
+
     private String facility;
-    
+
     private String department;
 
-    private Date arrival_datetime;
-    
+    private ZonedDateTime arrival_datetime;
+
     private BigDecimal RVUs;
-    
+
     private String CPT;
-    
+
     private int age;
-    
+
     public Arrival() {
         super();
     }
-    
-    public Arrival(UUID id, String client_group, String facility, String department, Date arrival_datetime, BigDecimal rVUs, String cPT, int age) {
+
+    public Arrival(
+            UUID id,
+            String client_group, 
+            String facility, 
+            String department, 
+            ZonedDateTime arrival_datetime, 
+            BigDecimal rVUs, 
+            String cPT, 
+            int age
+        ) {
         super();
         this.id = id;
         this.client_group = client_group;
@@ -101,11 +110,11 @@ public class Arrival {
         this.department = department;
     }
 
-    public Date getArrival_datetime() {
+    public ZonedDateTime getArrival_datetime() {
         return arrival_datetime;
     }
 
-    public void setArrival_datetime(Date arrival_datetime) {
+    public void setArrival_datetime(ZonedDateTime arrival_datetime) {
         this.arrival_datetime = arrival_datetime;
     }
 
