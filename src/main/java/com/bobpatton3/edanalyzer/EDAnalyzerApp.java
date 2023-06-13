@@ -1,10 +1,15 @@
 package com.bobpatton3.edanalyzer;
 
+/*
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
+import com.bobpatton3.edanalyzer.persistence.model.Arrival;
+import jakarta.annotation.PostConstruct;
+import com.bobpatton3.edanalyzer.service.IArrivalService;
+*/
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,20 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.bobpatton3.edanalyzer.persistence.model.Arrival;
 import com.bobpatton3.edanalyzer.persistence.repository.IScheduleRepository;
-import com.bobpatton3.edanalyzer.service.IArrivalService;
 import com.bobpatton3.edanalyzer.service.IScheduleService;
 
-import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
 public class EDAnalyzerApp {
 
     private static final Logger LOG = LoggerFactory.getLogger(EDAnalyzerApp.class);
-    
-    @Autowired
-    private IArrivalService arrivalService;
     
     @Autowired
     IScheduleService scheduleService;
@@ -48,6 +47,12 @@ public class EDAnalyzerApp {
     /*
      * 
      * This was used just to create the data. I might need it again but will have to work around some breaking changes I made on the ArrivalService and such
+     * 
+     * 
+    
+    @Autowired
+    private IArrivalService arrivalService;
+    
     private void generateAllBasicData() {
 
         for (int i = 0; i < 1440; i++) {
@@ -107,11 +112,11 @@ public class EDAnalyzerApp {
     
     private double randomRVUs(String cpt) {
         double rand = Math.random();
-        if(cpt.equals("99282")) return 1.0 + 2 * rand;
-        else if(cpt.equals("99283")) return 1.4 + 3 * rand;
-        else if(cpt.equals("99284")) return 2.6 + 5 * rand;
-        else if(cpt.equals("99285")) return 3.8 + 7 * rand;
-        else return 4.5 + 8 * rand;
+        if(cpt.equals("99282")) return 1.0 + 1.0 * rand;
+        else if(cpt.equals("99283")) return 1.4 + 1.5 * rand;
+        else if(cpt.equals("99284")) return 2.6 + 2.5 * rand;
+        else if(cpt.equals("99285")) return 3.8 + 3.5 * rand;
+        else return 4.5 + 4 * rand;
     }
 */
     
