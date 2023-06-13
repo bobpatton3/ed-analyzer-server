@@ -8,4 +8,5 @@ import com.bobpatton3.edanalyzer.persistence.model.Schedule;
 
 public interface IScheduleRepository extends CrudRepository<Schedule, UUID> {
 
+    
 }

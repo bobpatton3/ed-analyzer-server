@@ -27,6 +27,16 @@ public class Shift {
     public Shift() {
     }
     
+    public Shift(UUID shift_id, UUID schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week) {
+        super();
+        this.id = shift_id;
+        this.schedule_id = schedule_id;
+        this.start_hour = start_hour;
+        this.duration = duration;
+        this.provider_type = provider_type;
+        this.days_of_week = days_of_week;
+    }
+    
     public Shift(UUID schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week) {
         super();
         this.schedule_id = schedule_id;

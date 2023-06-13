@@ -22,6 +22,16 @@ public class Schedule {
     private String owner;
     
     private String schedule_name;
+    
+
+    public Schedule(UUID id, Date creation_date, Date update_date, String owner, String schedule_name) {
+        super();
+        this.id = id;
+        this.creation_date = creation_date;
+        this.update_date = update_date;
+        this.owner = owner;
+        this.schedule_name = schedule_name;
+    }
 
     public Schedule(String owner, String schedule_name) {
         super();

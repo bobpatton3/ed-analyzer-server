@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.Map;
 
+import com.bobpatton3.edanalyzer.persistence.model.Schedule;
 import com.bobpatton3.edanalyzer.persistence.model.Shift;
 
 public class ScheduleWithShiftsDto {
@@ -27,6 +28,16 @@ public class ScheduleWithShiftsDto {
         this.owner = owner;
         this.schedule_name = schedule_name;
         this.shifts = new HashMap<>();
+    }
+
+    public ScheduleWithShiftsDto(Schedule sched, Map<UUID, Shift> shifts) {
+        super();
+        this.id = sched.getId();
+        this.creation_date = sched.getCreation_date();
+        this.update_date = sched.getUpdate_date();
+        this.owner = sched.getOwner();
+        this.schedule_name = sched.getSchedule_name();
+        this.shifts = shifts;
     }
 
     public ScheduleWithShiftsDto(UUID id, Date creation_date, Date update_date, String owner, String schedule_name, Map<UUID, Shift> shifts) {

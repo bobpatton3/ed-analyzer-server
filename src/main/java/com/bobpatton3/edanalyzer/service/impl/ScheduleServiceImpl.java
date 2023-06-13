@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bobpatton3.edanalyzer.persistence.model.Schedule;
+import com.bobpatton3.edanalyzer.persistence.model.SchedulesWithShifts;
 import com.bobpatton3.edanalyzer.persistence.repository.IScheduleRepository;
+import com.bobpatton3.edanalyzer.persistence.repository.IScheduleWithShiftsRepository;
 import com.bobpatton3.edanalyzer.service.IScheduleService;
 
 import jakarta.transaction.Transactional;
@@ -20,10 +22,13 @@ public class ScheduleServiceImpl implements IScheduleService {
     
     @Autowired
     private IScheduleRepository scheduleRepository;
+    
+    @Autowired
+    private IScheduleWithShiftsRepository scheduleWithShiftsRepository;
 
     @Override
-    public Iterable<Schedule> findAll() {
-        return scheduleRepository.findAll();
+    public Iterable<SchedulesWithShifts> findAllForLocation(String client, String fac, String dept) {
+        return scheduleWithShiftsRepository.findAllForLocation(client, fac, dept);
     }
 
     @Override

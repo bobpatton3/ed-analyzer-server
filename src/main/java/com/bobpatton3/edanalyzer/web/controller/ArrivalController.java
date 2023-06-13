@@ -35,7 +35,7 @@ public class ArrivalController {
         
         Iterable<AggregatedArrivalHour> arrivals = arrivalService.getAggregatedArrivals(start_date, end_date, door_to_prov, client, fac, dept);
         
-        String[] dayLabels = {"SUN","MON","TUE","WED","THU","FRI","SAT","AVG" };
+        String[] dayLabels = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "AVG" };
         
         Map<String, Map<String, double[]>> retArrivals = new HashMap<String, Map<String, double[]>>();
         retArrivals.put("Full", new HashMap<String, double[]>());
