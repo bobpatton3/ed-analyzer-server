@@ -1,12 +1,15 @@
 package com.bobpatton3.edanalyzer.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,23 +34,27 @@ public class ScheduleController {
     // URL:  http://localhost:8080/schedules/A1%20Emergency%20Physicians/Memorial%20Hospital/Main%20ED
     
     @GetMapping("/{client}/{fac}/{dept}")
-    public Map<UUID, ScheduleWithShiftsDto> findAllMap(
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<SchedulesWithShifts> findAllMap(
         @PathVariable String client,
         @PathVariable String fac,
         @PathVariable String dept
     ) {
-        Iterable<SchedulesWithShifts> schedulesWithShifts = scheduleService.findAllForLocation(client, fac, dept);
+        Iterable<SchedulesWithShifts> schedulesWithShiftsIter = scheduleService.findAllForLocation(client, fac, dept);
         
-        Map<UUID, ScheduleWithShiftsDto> returnSchedules = new HashMap<UUID, ScheduleWithShiftsDto>();
-
-        schedulesWithShifts.forEach(s -> {
-            if (! returnSchedules.containsKey(s.getSchedule_id())) {
-                Schedule sched = new Schedule(s.getSchedule_id(), s.getCreation_date(), s.getUpdate_date(), s.getOwner(), s.getSchedule_name());
-                returnSchedules.put(s.getSchedule_id(), convertToScheduleWithShiftsDto(sched, schedulesWithShifts));
-            }
-        });
+        List<SchedulesWithShifts> schedulesWithShifts = new ArrayList<SchedulesWithShifts>();
+        schedulesWithShiftsIter.forEach(schedulesWithShifts::add);
         
-        return returnSchedules;
+//        Map<UUID, ScheduleWithShiftsDto> returnSchedules = new HashMap<UUID, ScheduleWithShiftsDto>();
+//
+//        schedulesWithShifts.forEach(s -> {
+//            if (! returnSchedules.containsKey(s.getSchedule_id())) {
+//                Schedule sched = new Schedule(s.getSchedule_id(), s.getCreation_date(), s.getUpdate_date(), s.getOwner(), s.getSchedule_name());
+//                returnSchedules.put(s.getSchedule_id(), convertToScheduleWithShiftsDto(sched, schedulesWithShifts));
+//            }
+//        });
+        
+        return schedulesWithShifts;
     }
     
     private ScheduleWithShiftsDto convertToScheduleWithShiftsDto(Schedule sched, Iterable<SchedulesWithShifts> schedulesWithShifts) {

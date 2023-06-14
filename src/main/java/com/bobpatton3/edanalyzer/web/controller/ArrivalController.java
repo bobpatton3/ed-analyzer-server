@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class ArrivalController {
     // URL:  http://localhost:8080/arrivals/2022-01-02%2000:00/2022-07-01%2000:00/30%20minutes/A1%20Emergency%20Physicians/Memorial%20Hospital/Main%20ED
 
     @GetMapping("/{start_date}/{end_date}/{door_to_prov}/{client}/{fac}/{dept}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Map<String, Map<String, double[]>> getAggregatedArrivalsData
     (
         @PathVariable String start_date,
@@ -45,17 +47,14 @@ public class ArrivalController {
             retArrivals.get("Full").put(dayLabels[i], new double[25] );
             retArrivals.get("l5CC").put(dayLabels[i], new double[25] );
         }
-        double[] avg_all = new double[25];
-        double[] avg_l5cc = new double[25];
-        
         
         arrivals.forEach(a -> {
             int hod = a.getHod();
             String day = dayLabels[a.getDow()];
             double all_rvus = Math.round( a.getAll_avg_rvus().doubleValue() * 100 ) / 100.0;
             double l5cc_rvus = Math.round( a.getL5cc_avg_rvus().doubleValue() * 100 ) / 100.0;
-            avg_all[hod] += all_rvus;
-            avg_l5cc[hod] += l5cc_rvus;
+            retArrivals.get("Full").get("AVG")[hod] += all_rvus;
+            retArrivals.get("l5CC").get("AVG")[hod] += l5cc_rvus;
             
             retArrivals.get("Full").get(day)[hod] = all_rvus;
             retArrivals.get("l5CC").get(day)[hod] = l5cc_rvus;
