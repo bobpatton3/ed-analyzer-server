@@ -11,6 +11,8 @@ import com.bobpatton3.edanalyzer.persistence.model.Shift;
 import com.bobpatton3.edanalyzer.persistence.repository.IShiftRepository;
 import com.bobpatton3.edanalyzer.service.IShiftService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ShiftServiceImpl implements IShiftService {
     
@@ -30,8 +32,19 @@ public class ShiftServiceImpl implements IShiftService {
     }
 
     @Override
+    public Iterable<Shift> saveAll(Iterable<Shift> shifts) {
+        return shiftRepository.saveAll(shifts);
+    }
+
+    @Override
     public void delete(UUID id) {
         shiftRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteAllForScheduleID(UUID schedule_id) {
+        shiftRepository.deleteAllForScheduleID(schedule_id);
     }
 
 }

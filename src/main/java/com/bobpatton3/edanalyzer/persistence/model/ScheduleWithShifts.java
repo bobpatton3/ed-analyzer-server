@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class SchedulesWithShifts {
+public class ScheduleWithShifts {
     
     @Id
     private UUID shift_id;
@@ -24,12 +24,16 @@ public class SchedulesWithShifts {
     private int duration;
     private String provider_type;
     private boolean[] days_of_week;
-
+    private String client_group;
+    private String facility;
+    private String department;
     
-    public SchedulesWithShifts() {
+    public ScheduleWithShifts() {
     } 
     
-    public SchedulesWithShifts(UUID shift_id, Date creation_date, Date update_date, String owner, String schedule_name, UUID schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week) {
+    public ScheduleWithShifts(UUID shift_id, Date creation_date, Date update_date, String owner, 
+                                String schedule_name, String client_group, String facility, String department, 
+                                UUID schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week) {
         super();
         this.shift_id = shift_id;
         this.creation_date = creation_date;
@@ -41,8 +45,35 @@ public class SchedulesWithShifts {
         this.duration = duration;
         this.provider_type = provider_type;
         this.days_of_week = days_of_week;
+        this.client_group = client_group;
+        this.facility = facility;
+        this.department = department;
     }
     
+    public String getClient_group() {
+        return client_group;
+    }
+
+    public void setClient_group(String client_group) {
+        this.client_group = client_group;
+    }
+
+    public String getFacility() {
+        return facility;
+    }
+
+    public void setFacility(String facility) {
+        this.facility = facility;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     public UUID getShift_id() {
         return shift_id;
     }
@@ -121,7 +152,7 @@ public class SchedulesWithShifts {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        SchedulesWithShifts other = (SchedulesWithShifts) obj;
+        ScheduleWithShifts other = (ScheduleWithShifts) obj;
         return Objects.equals(creation_date, other.creation_date) && Arrays.equals(days_of_week, other.days_of_week) && duration == other.duration && Objects.equals(owner, other.owner) && Objects.equals(provider_type, other.provider_type)
             && Objects.equals(schedule_id, other.schedule_id) && Objects.equals(schedule_name, other.schedule_name) && Objects.equals(shift_id, other.shift_id) && start_hour == other.start_hour && Objects.equals(update_date, other.update_date);
     }
