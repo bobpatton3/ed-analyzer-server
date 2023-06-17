@@ -20,13 +20,4 @@ public interface IScheduleWithShiftsRepository extends CrudRepository<ScheduleWi
         @Param("client_group") String client, 
         @Param("facility") String fac, 
         @Param("department") String dept);
-
-    @Query(value = "SELECT sc.creation_date, sc.update_date, sc.owner, sc.schedule_name, sh.schedule_id, " +
-                      " sh.id as shift_id, sh.start_hour, sh.duration, sh.provider_type, sh.days_of_week, " +
-                      " sc.client_group, sc.facility, sc.department " +
-                      " FROM schedules AS sc INNER JOIN shifts AS sh ON sh.schedule_id = sc.id " +
-                      " WHERE sc.id = :schedule_id  ",
-                nativeQuery = true)
-    public Iterable<ScheduleWithShifts> findAllForScheduleId(@Param("schedule_id") UUID schedule_id);
-    
 }

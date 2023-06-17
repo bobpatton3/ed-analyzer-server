@@ -46,6 +46,7 @@ public class ScheduleServiceImpl implements IScheduleService {
     @Override
     public void delete(UUID id) {
         scheduleRepository.deleteById(id);
+        shiftService.deleteAllForScheduleID(id);
     }
 
     @Override

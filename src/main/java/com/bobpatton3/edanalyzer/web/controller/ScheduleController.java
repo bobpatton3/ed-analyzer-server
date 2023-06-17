@@ -33,8 +33,6 @@ public class ScheduleController {
     @Autowired
     private IScheduleService scheduleService;
     
-    // URL:  http://localhost:8080/schedules/A1%20Emergency%20Physicians/Memorial%20Hospital/Main%20ED
-    
     @GetMapping("/{client}/{fac}/{dept}")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<ScheduleWithShifts> findAllMap(
@@ -46,15 +44,6 @@ public class ScheduleController {
         
         List<ScheduleWithShifts> schedulesWithShifts = new ArrayList<ScheduleWithShifts>();
         schedulesWithShiftsIter.forEach(schedulesWithShifts::add);
-        
-        //        Map<UUID, ScheduleWithShiftsDto> returnSchedules = new HashMap<UUID, ScheduleWithShiftsDto>();
-        //
-        //        schedulesWithShifts.forEach(s -> {
-        //            if (! returnSchedules.containsKey(s.getSchedule_id())) {
-        //                Schedule sched = new Schedule(s.getSchedule_id(), s.getCreation_date(), s.getUpdate_date(), s.getOwner(), s.getSchedule_name());
-        //                returnSchedules.put(s.getSchedule_id(), convertToScheduleWithShiftsDto(sched, schedulesWithShifts));
-        //            }
-        //        });
         
         return schedulesWithShifts;
     }
@@ -68,22 +57,21 @@ public class ScheduleController {
         return id.toString();
     }
     
-    @PutMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public List<ScheduleWithShifts> updateProject(@PathVariable("id") UUID id, @RequestBody List<ScheduleWithShifts> updatedSchedule) {
-        return scheduleService.updateFullSchedule(id , updatedSchedule);
-    }
-    
     @DeleteMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public void deleteSchedule(@PathVariable("id") UUID id) {
         scheduleService.delete(id);
     }
+ 
+    /*
+     * Don't think I need this:
+     * 
+    @PutMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<ScheduleWithShifts> updateSchedule(@PathVariable("id") UUID id, @RequestBody List<ScheduleWithShifts> updatedSchedule) {
+        return scheduleService.updateFullSchedule(id , updatedSchedule);
+    }
+     */
 
 }
 
-
-/*
-    
-
-*/
