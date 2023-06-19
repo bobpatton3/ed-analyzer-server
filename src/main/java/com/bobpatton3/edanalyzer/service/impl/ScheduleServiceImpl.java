@@ -34,8 +34,8 @@ public class ScheduleServiceImpl implements IScheduleService {
     private IShiftService shiftService;
 
     @Override
-    public Iterable<ScheduleWithShifts> findAllForLocation(String client, String fac, String dept) {
-        return scheduleWithShiftsRepository.findAllForLocation(client, fac, dept);
+    public Iterable<ScheduleWithShifts> findAllForLocation(UUID department_id) {
+        return scheduleWithShiftsRepository.findAllForLocation(department_id);
     }
 
     @Override

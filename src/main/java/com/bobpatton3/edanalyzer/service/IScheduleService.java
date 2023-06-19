@@ -9,7 +9,7 @@ import com.bobpatton3.edanalyzer.persistence.model.ScheduleWithShifts;
 
 public interface IScheduleService {
     
-    Iterable<ScheduleWithShifts> findAllForLocation(String client, String fac, String dept);
+    Iterable<ScheduleWithShifts> findAllForLocation(UUID department_id);
     
     Schedule save(Schedule schedule);
     

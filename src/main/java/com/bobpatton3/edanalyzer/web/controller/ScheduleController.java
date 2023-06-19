@@ -33,14 +33,12 @@ public class ScheduleController {
     @Autowired
     private IScheduleService scheduleService;
     
-    @GetMapping("/{client}/{fac}/{dept}")
+    @GetMapping("/{department_id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<ScheduleWithShifts> findAllMap(
-        @PathVariable String client,
-        @PathVariable String fac,
-        @PathVariable String dept
+        @PathVariable UUID department_id
     ) {
-        Iterable<ScheduleWithShifts> schedulesWithShiftsIter = scheduleService.findAllForLocation(client, fac, dept);
+        Iterable<ScheduleWithShifts> schedulesWithShiftsIter = scheduleService.findAllForLocation(department_id);
         
         List<ScheduleWithShifts> schedulesWithShifts = new ArrayList<ScheduleWithShifts>();
         schedulesWithShiftsIter.forEach(schedulesWithShifts::add);

@@ -27,13 +27,14 @@ public class ScheduleWithShifts {
     private String client_group;
     private String facility;
     private String department;
+    private UUID department_id;
     
     public ScheduleWithShifts() {
     } 
     
     public ScheduleWithShifts(UUID shift_id, Date creation_date, Date update_date, String owner, 
                                 String schedule_name, String client_group, String facility, String department, 
-                                UUID schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week) {
+                                UUID schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week, UUID department_id) {
         super();
         this.shift_id = shift_id;
         this.creation_date = creation_date;
@@ -48,8 +49,17 @@ public class ScheduleWithShifts {
         this.client_group = client_group;
         this.facility = facility;
         this.department = department;
+        this.department_id = department_id;
     }
     
+    public UUID getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(UUID department_id) {
+        this.department_id = department_id;
+    }
+
     public String getClient_group() {
         return client_group;
     }
@@ -140,7 +150,7 @@ public class ScheduleWithShifts {
         final int prime = 31;
         int result = 1;
         result = prime * result + Arrays.hashCode(days_of_week);
-        result = prime * result + Objects.hash(creation_date, duration, owner, provider_type, schedule_id, schedule_name, shift_id, start_hour, update_date);
+        result = prime * result + Objects.hash(client_group, creation_date, department, department_id, duration, facility, owner, provider_type, schedule_id, schedule_name, shift_id, start_hour, update_date);
         return result;
     }
 
@@ -153,9 +163,17 @@ public class ScheduleWithShifts {
         if (getClass() != obj.getClass())
             return false;
         ScheduleWithShifts other = (ScheduleWithShifts) obj;
-        return Objects.equals(creation_date, other.creation_date) && Arrays.equals(days_of_week, other.days_of_week) && duration == other.duration && Objects.equals(owner, other.owner) && Objects.equals(provider_type, other.provider_type)
+        return Objects.equals(client_group, other.client_group) && Objects.equals(creation_date, other.creation_date) && Arrays.equals(days_of_week, other.days_of_week) && Objects.equals(department, other.department)
+            && Objects.equals(department_id, other.department_id) && duration == other.duration && Objects.equals(facility, other.facility) && Objects.equals(owner, other.owner) && Objects.equals(provider_type, other.provider_type)
             && Objects.equals(schedule_id, other.schedule_id) && Objects.equals(schedule_name, other.schedule_name) && Objects.equals(shift_id, other.shift_id) && start_hour == other.start_hour && Objects.equals(update_date, other.update_date);
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "ScheduleWithShifts [shift_id=" + shift_id + ", creation_date=" + creation_date + ", update_date=" + update_date + ", owner=" + owner + ", schedule_name=" + schedule_name + ", schedule_id=" + schedule_id + ", start_hour=" + start_hour
+            + ", duration=" + duration + ", provider_type=" + provider_type + ", days_of_week=" + Arrays.toString(days_of_week) + ", client_group=" + client_group + ", facility=" + facility + ", department=" + department + ", department_id=" + department_id
+            + "]";
+    }
+
+
 }

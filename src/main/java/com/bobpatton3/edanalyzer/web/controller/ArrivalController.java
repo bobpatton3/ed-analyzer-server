@@ -2,6 +2,7 @@ package com.bobpatton3.edanalyzer.web.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,19 +24,17 @@ public class ArrivalController {
     
     // URL:  http://localhost:8080/arrivals/2022-01-02%2000:00/2022-07-01%2000:00/30%20minutes/A1%20Emergency%20Physicians/Memorial%20Hospital/Main%20ED
 
-    @GetMapping("/{start_date}/{end_date}/{door_to_prov}/{client}/{fac}/{dept}")
+    @GetMapping("/{start_date}/{end_date}/{door_to_prov}/{department_id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public Map<String, Map<String, double[]>> getAggregatedArrivalsData
     (
         @PathVariable String start_date,
         @PathVariable String end_date,
         @PathVariable String door_to_prov,
-        @PathVariable String client,
-        @PathVariable String fac,
-        @PathVariable String dept
+        @PathVariable UUID department_id
     ) {
         
-        Iterable<AggregatedArrivalHour> arrivals = arrivalService.getAggregatedArrivals(start_date, end_date, door_to_prov, client, fac, dept);
+        Iterable<AggregatedArrivalHour> arrivals = arrivalService.getAggregatedArrivals(start_date, end_date, door_to_prov, department_id);
         
         String[] dayLabels = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "AVG" };
         
