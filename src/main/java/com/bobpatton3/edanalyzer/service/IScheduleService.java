@@ -11,13 +11,9 @@ public interface IScheduleService {
     
     Iterable<ScheduleWithShifts> findAllForLocation(UUID department_id);
     
-    Schedule save(Schedule schedule);
-    
     void delete(UUID id);
     
     UUID saveNewFullSchedule(List<NewScheduleWithShifts> newSchedule);
 
-    
-    List<ScheduleWithShifts>  updateFullSchedule(UUID id, List<ScheduleWithShifts> newSchedule);
 
 }

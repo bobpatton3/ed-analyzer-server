@@ -22,23 +22,8 @@ public class ShiftServiceImpl implements IShiftService {
     private IShiftRepository shiftRepository;
 
     @Override
-    public Iterable<Shift> findAll() {
-        return shiftRepository.findAll();
-    }
-
-    @Override
-    public Shift save(Shift shift) {
-        return shiftRepository.save(shift);
-    }
-
-    @Override
     public Iterable<Shift> saveAll(Iterable<Shift> shifts) {
         return shiftRepository.saveAll(shifts);
-    }
-
-    @Override
-    public void delete(UUID id) {
-        shiftRepository.deleteById(id);
     }
 
     @Transactional

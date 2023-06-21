@@ -39,11 +39,6 @@ public class ScheduleServiceImpl implements IScheduleService {
     }
 
     @Override
-    public Schedule save(Schedule schedule) {
-        return scheduleRepository.save(schedule);
-    }
-
-    @Override
     public void delete(UUID id) {
         scheduleRepository.deleteById(id);
         shiftService.deleteAllForScheduleID(id);
@@ -87,7 +82,8 @@ public class ScheduleServiceImpl implements IScheduleService {
             firstItem.getSchedule_name(), 
             firstItem.getClient_group(), 
             firstItem.getFacility(), 
-            firstItem.getDepartment()
+            firstItem.getDepartment(),
+            firstItem.getDepartment_id()
         );
         
         if (!schedule_is_new) schedule.setId(initial_schedule_id);
@@ -105,12 +101,6 @@ public class ScheduleServiceImpl implements IScheduleService {
         
         return schedule_id;
         
-    }
-
-    @Override
-    public List<ScheduleWithShifts> updateFullSchedule(UUID id, List<ScheduleWithShifts> newSchedule) {
-        // TODO Auto-generated method stub
-        return new ArrayList<ScheduleWithShifts>();
     }
 
 }
