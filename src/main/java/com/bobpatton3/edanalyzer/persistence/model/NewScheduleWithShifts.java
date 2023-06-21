@@ -28,17 +28,25 @@ public class NewScheduleWithShifts {
     private int duration;
     private String provider_type;
     private boolean[] days_of_week;
-    private String client_group;
-    private String facility;
-    private String department;
     private UUID department_id;
 
 
     public NewScheduleWithShifts() {
     }
     
-    public NewScheduleWithShifts(String shift_id, Date creation_date, Date update_date, String owner, String schedule_name, String schedule_id, int start_hour, int duration, String provider_type, boolean[] days_of_week, String client_group, String facility,
-        String department, UUID department_id) {
+    public NewScheduleWithShifts(
+        String shift_id, 
+        Date creation_date, 
+        Date update_date, 
+        String owner, 
+        String schedule_name, 
+        String schedule_id, 
+        int start_hour, 
+        int duration, 
+        String provider_type, 
+        boolean[] days_of_week, 
+        UUID department_id
+    ) {
         super();
         this.shift_id = shift_id;
         this.creation_date = creation_date;
@@ -50,9 +58,6 @@ public class NewScheduleWithShifts {
         this.duration = duration;
         this.provider_type = provider_type;
         this.days_of_week = days_of_week;
-        this.client_group = client_group;
-        this.facility = facility;
-        this.department = department;
         this.department_id = department_id;
     }
 
@@ -118,24 +123,6 @@ public class NewScheduleWithShifts {
     public void setDays_of_week(boolean[] days_of_week) {
         this.days_of_week = days_of_week;
     }
-    public String getClient_group() {
-        return client_group;
-    }
-    public void setClient_group(String client_group) {
-        this.client_group = client_group;
-    }
-    public String getFacility() {
-        return facility;
-    }
-    public void setFacility(String facility) {
-        this.facility = facility;
-    }
-    public String getDepartment() {
-        return department;
-    }
-    public void setDepartment(String department) {
-        this.department = department;
-    }
     public UUID getDepartment_id() {
         return department_id;
     }
@@ -148,7 +135,7 @@ public class NewScheduleWithShifts {
         final int prime = 31;
         int result = 1;
         result = prime * result + Arrays.hashCode(days_of_week);
-        result = prime * result + Objects.hash(client_group, creation_date, department, department_id, duration, facility, owner, provider_type, schedule_id, schedule_name, shift_id, start_hour, update_date);
+        result = prime * result + Objects.hash( creation_date, department_id, duration, owner, provider_type, schedule_id, schedule_name, shift_id, start_hour, update_date);
         return result;
     }
 
@@ -161,15 +148,15 @@ public class NewScheduleWithShifts {
         if (getClass() != obj.getClass())
             return false;
         NewScheduleWithShifts other = (NewScheduleWithShifts) obj;
-        return Objects.equals(client_group, other.client_group) && Objects.equals(creation_date, other.creation_date) && Arrays.equals(days_of_week, other.days_of_week) && Objects.equals(department, other.department)
-            && Objects.equals(department_id, other.department_id) && duration == other.duration && Objects.equals(facility, other.facility) && Objects.equals(owner, other.owner) && Objects.equals(provider_type, other.provider_type)
+        return Objects.equals(creation_date, other.creation_date) && Arrays.equals(days_of_week, other.days_of_week) 
+            && Objects.equals(department_id, other.department_id) && duration == other.duration && Objects.equals(owner, other.owner) && Objects.equals(provider_type, other.provider_type)
             && Objects.equals(schedule_id, other.schedule_id) && Objects.equals(schedule_name, other.schedule_name) && Objects.equals(shift_id, other.shift_id) && start_hour == other.start_hour && Objects.equals(update_date, other.update_date);
     }
 
     @Override
     public String toString() {
         return "NewScheduleWithShifts [shift_id=" + shift_id + ", creation_date=" + creation_date + ", update_date=" + update_date + ", owner=" + owner + ", schedule_name=" + schedule_name + ", schedule_id=" + schedule_id + ", start_hour=" + start_hour
-            + ", duration=" + duration + ", provider_type=" + provider_type + ", days_of_week=" + Arrays.toString(days_of_week) + ", client_group=" + client_group + ", facility=" + facility + ", department=" + department + ", department_id=" + department_id
+            + ", duration=" + duration + ", provider_type=" + provider_type + ", days_of_week=" + Arrays.toString(days_of_week) + ", department_id=" + department_id
             + "]";
     }
 

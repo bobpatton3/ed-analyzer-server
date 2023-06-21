@@ -46,7 +46,7 @@ public class ScheduleServiceImpl implements IScheduleService {
 
     @Override
     public UUID saveNewFullSchedule(List<NewScheduleWithShifts> newSchedule) {
-        /* TODO
+        /* 
          * 1. if schedule_id can convert to a UUID and is in the schedule table then delete all its related shifts
          * 2. else save the new schedule and retrieve its UUID schedule_id
          * 3. save all of the shifts:
@@ -79,10 +79,7 @@ public class ScheduleServiceImpl implements IScheduleService {
             firstItem.getCreation_date(), 
             firstItem.getUpdate_date(), 
             firstItem.getOwner(), 
-            firstItem.getSchedule_name(), 
-            firstItem.getClient_group(), 
-            firstItem.getFacility(), 
-            firstItem.getDepartment(),
+            firstItem.getSchedule_name(),
             firstItem.getDepartment_id()
         );
         

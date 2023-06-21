@@ -22,72 +22,42 @@ public class Schedule {
     private Date update_date;
     private String owner;
     private String schedule_name;
-    private String client_group;
-    private String facility;
-    private String department;
     private UUID department_id;
     
 
-    public Schedule(Date creation_date, Date update_date, String owner, String schedule_name, String client_group, String facility, String department, UUID department_id) {
+    public Schedule(
+        Date creation_date, 
+        Date update_date, 
+        String owner, 
+        String schedule_name, 
+        UUID department_id
+    ) {
         super();
         this.creation_date = creation_date;
         this.update_date = update_date;
         this.owner = owner;
         this.schedule_name = schedule_name;
-        this.client_group = client_group;
-        this.facility = facility;
-        this.department = department;
         this.department_id = department_id;
     }
 
-    public Schedule(UUID id, Date creation_date, Date update_date, String owner, String schedule_name, String client_group, String facility, String department, UUID department_id) {
+    public Schedule(UUID id, Date creation_date, Date update_date, String owner, String schedule_name, UUID department_id) {
         super();
         this.id = id;
         this.creation_date = creation_date;
         this.update_date = update_date;
         this.owner = owner;
         this.schedule_name = schedule_name;
-        this.client_group = client_group;
-        this.facility = facility;
-        this.department = department;
         this.department_id = department_id;
     }
 
-    public Schedule(String owner, String schedule_name, String client_group, String facility, String department, UUID department_id) {
+    public Schedule(String owner, String schedule_name, UUID department_id) {
         super();
         this.owner = owner;
         this.schedule_name = schedule_name;
-        this.client_group = client_group;
-        this.facility = facility;
-        this.department = department;
         this.department_id = department_id;
     }
 
     public Schedule() {
-    }
-
-    public String getClient_group() {
-        return client_group;
-    }
-
-    public void setClient_group(String client_group) {
-        this.client_group = client_group;
-    }
-
-    public String getFacility() {
-        return facility;
-    }
-
-    public void setFacility(String facility) {
-        this.facility = facility;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     public UUID getId() {
@@ -140,7 +110,7 @@ public class Schedule {
 
     @Override
     public int hashCode() {
-        return Objects.hash(client_group, creation_date, department, department_id, facility, id, owner, schedule_name, update_date);
+        return Objects.hash( creation_date, department_id, id, owner, schedule_name, update_date);
     }
 
     @Override
@@ -152,14 +122,14 @@ public class Schedule {
         if (getClass() != obj.getClass())
             return false;
         Schedule other = (Schedule) obj;
-        return Objects.equals(client_group, other.client_group) && Objects.equals(creation_date, other.creation_date) && Objects.equals(department, other.department) && Objects.equals(department_id, other.department_id)
-            && Objects.equals(facility, other.facility) && Objects.equals(id, other.id) && Objects.equals(owner, other.owner) && Objects.equals(schedule_name, other.schedule_name) && Objects.equals(update_date, other.update_date);
+        return Objects.equals(creation_date, other.creation_date) && Objects.equals(department_id, other.department_id)
+            && Objects.equals(id, other.id) && Objects.equals(owner, other.owner) && Objects.equals(schedule_name, other.schedule_name) && Objects.equals(update_date, other.update_date);
     }
 
     @Override
     public String toString() {
-        return "Schedule [id=" + id + ", creation_date=" + creation_date + ", update_date=" + update_date + ", owner=" + owner + ", schedule_name=" + schedule_name + ", client_group=" + client_group + ", facility=" + facility + ", department=" + department
-            + ", department_id=" + department_id + "]";
+        return "Schedule [id=" + id + ", creation_date=" + creation_date + ", update_date=" + update_date + ", owner=" + owner + ", schedule_name=" + schedule_name +
+            ", department_id=" + department_id + "]";
     }
 
 }
