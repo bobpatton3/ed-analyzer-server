@@ -1,7 +1,5 @@
 package com.bobpatton3.edanalyzer.web.controller;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +17,10 @@ public class PostLoginInfoController {
     @Autowired
     private IPostLoginInfoService postLoginInfoService;
     
-    @GetMapping("/{user_id}")
+    @GetMapping("/{username}")
     @CrossOrigin(origins = "http://localhost:3000")
-    Iterable<PostLoginInfo> findAll(@PathVariable UUID user_id) {
-        return postLoginInfoService.findAll(user_id);
+    Iterable<PostLoginInfo> findAll(@PathVariable String username) {
+        return postLoginInfoService.findAll(username);
     }
 
 }

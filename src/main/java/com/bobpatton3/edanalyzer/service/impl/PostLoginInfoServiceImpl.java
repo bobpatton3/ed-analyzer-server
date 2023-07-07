@@ -1,7 +1,5 @@
 package com.bobpatton3.edanalyzer.service.impl;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,8 @@ public class PostLoginInfoServiceImpl implements IPostLoginInfoService
     private IPostLoginInfoRepository postLoginInfoRepository;
 
     @Override
-    public Iterable<PostLoginInfo> findAll(UUID user_id) {
-        return postLoginInfoRepository.findAllForUser(user_id);
+    public Iterable<PostLoginInfo> findAll(String username) {
+        return postLoginInfoRepository.findAllForUser(username);
     }
 
 }

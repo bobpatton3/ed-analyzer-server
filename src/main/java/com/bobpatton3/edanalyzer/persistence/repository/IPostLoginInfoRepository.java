@@ -13,8 +13,9 @@ public interface IPostLoginInfoRepository extends CrudRepository<PostLoginInfo, 
     @Query(value = "SELECT dm.* "
                 + " FROM department_metadata as dm "
                 + " INNER JOIN user_department_auth as uda ON uda.department_id = dm.department_id "
-                + " WHERE uda.user_id = :user_id AND uda.status = 'ACTIVE' ", 
+                + " INNER JOIN users as u on u.id = uda.user_id "
+                + " WHERE u.username = :username AND uda.status = 'ACTIVE' ", 
            nativeQuery = true)
-    public Iterable<PostLoginInfo> findAllForUser(@Param("user_id") UUID user_id);
+    public Iterable<PostLoginInfo> findAllForUser(@Param("username") String username);
 
 }
