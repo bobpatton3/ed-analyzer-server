@@ -50,8 +50,9 @@ public class ScheduleController {
     @CrossOrigin(origins = "http://localhost:3000")
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestBody List<NewScheduleWithShifts> newSchedule) {
-        //newSchedule.forEach((item) -> {System.out.println(item.toString()); } );
+
         UUID id = scheduleService.saveNewFullSchedule(newSchedule);
+
         return id.toString();
     }
     
@@ -60,16 +61,6 @@ public class ScheduleController {
     public void deleteSchedule(@PathVariable("id") UUID id) {
         scheduleService.delete(id);
     }
- 
-    /*
-     * Don't think I need this:
-     * 
-    @PutMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public List<ScheduleWithShifts> updateSchedule(@PathVariable("id") UUID id, @RequestBody List<ScheduleWithShifts> updatedSchedule) {
-        return scheduleService.updateFullSchedule(id , updatedSchedule);
-    }
-     */
 
 }
 

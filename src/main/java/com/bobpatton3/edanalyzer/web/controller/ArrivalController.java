@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bobpatton3.edanalyzer.EDAnalyzerApp;
 import com.bobpatton3.edanalyzer.persistence.model.AggregatedArrivalHour;
 import com.bobpatton3.edanalyzer.service.IArrivalService;
 
 @RestController
 @RequestMapping(value = "/arrivals")
 public class ArrivalController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(EDAnalyzerApp.class);
 
     @Autowired
     private IArrivalService arrivalService;
@@ -29,6 +34,8 @@ public class ArrivalController {
         // Do some checks on the three strings - Assure the first two can resolve to a date and that the third resolves to a SQL interval?
         // On the other hand, those conversions are checked in the PostGreSQL function that is called.
         // Maybe just catch all exceptions and return an empty Map to hide details from the caller
+        
+        LOG.info("getAggregatedArrivalsData: " + start_date + " : " + end_date + " : " + door_to_prov);
 
         Map<String, Map<String, double[]>> retArrivals = new HashMap<String, Map<String, double[]>>();
 
@@ -73,8 +80,11 @@ public class ArrivalController {
 
             retArrivals.get("Full").get("AVG")[24] = retArrivals.get("Full").get("AVG")[0];
             retArrivals.get("l5CC").get("AVG")[24] = retArrivals.get("l5CC").get("AVG")[0];
+            
+            LOG.info("getAggregatedArrivalsData: " + retArrivals.get("Full").get("AVG")[0]);
+            
         } catch (Exception e) {
-            // log the exception and maybe notify someone?
+            LOG.error(e.toString());
         }
 
         return retArrivals;
