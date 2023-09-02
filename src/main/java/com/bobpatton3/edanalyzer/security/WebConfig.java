@@ -35,7 +35,7 @@ public class WebConfig {
         ));   
         config.setMaxAge(3600L);
         source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(source));
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(-102);
         return bean;
     }

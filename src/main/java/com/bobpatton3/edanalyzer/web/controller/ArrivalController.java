@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bobpatton3.edanalyzer.EDAnalyzerApp;
 import com.bobpatton3.edanalyzer.persistence.model.AggregatedArrivalHour;
 import com.bobpatton3.edanalyzer.service.IArrivalService;
 
@@ -21,7 +20,7 @@ import com.bobpatton3.edanalyzer.service.IArrivalService;
 @RequestMapping(value = "/arrivals")
 public class ArrivalController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(EDAnalyzerApp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArrivalController.class);
 
     @Autowired
     private IArrivalService arrivalService;
@@ -35,16 +34,16 @@ public class ArrivalController {
         // On the other hand, those conversions are checked in the PostGreSQL function that is called.
         // Maybe just catch all exceptions and return an empty Map to hide details from the caller
         
-        LOG.info("getAggregatedArrivalsData: " + start_date + " : " + end_date + " : " + door_to_prov);
+        LOG.info("getAggregatedArrivalsData: {} : {} : {}", start_date, end_date, door_to_prov);
 
-        Map<String, Map<String, double[]>> retArrivals = new HashMap<String, Map<String, double[]>>();
+        Map<String, Map<String, double[]>> retArrivals = new HashMap<>();
 
         try {
             Iterable<AggregatedArrivalHour> arrivals = arrivalService.getAggregatedArrivals(start_date, end_date, door_to_prov, department_id);
 
             String[] dayLabels = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "AVG" };
-            retArrivals.put("Full", new HashMap<String, double[]>());
-            retArrivals.put("l5CC", new HashMap<String, double[]>());
+            retArrivals.put("Full", new HashMap<>());
+            retArrivals.put("l5CC", new HashMap<>());
 
             for (int i = 0; i < 8; i++) {
                 retArrivals.get("Full").put(dayLabels[i], new double[25]);
@@ -80,8 +79,6 @@ public class ArrivalController {
 
             retArrivals.get("Full").get("AVG")[24] = retArrivals.get("Full").get("AVG")[0];
             retArrivals.get("l5CC").get("AVG")[24] = retArrivals.get("l5CC").get("AVG")[0];
-            
-            LOG.info("getAggregatedArrivalsData: " + retArrivals.get("Full").get("AVG")[0]);
             
         } catch (Exception e) {
             LOG.error(e.toString());
