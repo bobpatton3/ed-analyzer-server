@@ -29,5 +29,4 @@ public class EDAnalyzerApp {
         LOG.info("Fetching all schedules: ");
         scheduleRepository.findAll().forEach(p -> LOG.info(p.toString()));
     }
-    
 }

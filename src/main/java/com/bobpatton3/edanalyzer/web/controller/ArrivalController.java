@@ -25,7 +25,7 @@ public class ArrivalController {
     @Autowired
     private IArrivalService arrivalService;
 
-    // URL: http://localhost:8080/arrivals/2022-01-02%2000:00/2022-07-01%2000:00/30%20minutes/A1%20Emergency%20Physicians/Memorial%20Hospital/Main%20ED
+    // URL: http://localhost:8080/arrivals/2022-01-02%2000:00/2022-07-01%2000:00/710ad2b4-5748-434f-8ece-1e0339b4a76e
 
     @GetMapping("/{start_date}/{end_date}/{door_to_prov}/{department_id}")
     @CrossOrigin(origins = "http://localhost:3000")
