@@ -1,7 +1,7 @@
 # Use a multi-stage build to keep the image size smaller
 
 # Stage 1: Build the application
-FROM maven:3.9.2-eclipse-temurin-17 AS builder
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -19,13 +19,13 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21
 
 # Set working directory
 WORKDIR /app
 
 # Copy the packaged JAR from the builder stage
-COPY --from=builder /app/target/your-app-name.jar ./app.jar
+COPY --from=builder /app/target/edanalyzer-0.0.1-SNAPSHOT.jar ./app.jar
 
 # Expose the port on which the app will run
 EXPOSE 8080
